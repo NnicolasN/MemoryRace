@@ -1,0 +1,98 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>tsp.pro3600.memoryrace</groupId>
+	<artifactId>application-client</artifactId>
+	<version>1</version>
+
+	<name>Application MemoryRace</name>
+	<description>Application cliente pour le projet PRO 3600 MemoryRace</description>
+	<organization>
+		<name>Télécom SudParis</name>
+	</organization>
+	<inceptionYear>2025</inceptionYear>
+
+	<developers>
+		<developer>
+			<name>Alexandre Naizondard</name>
+			<roles>
+				<role>développeur python</role>
+				<role>base de données</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Hugo Kennedy--Martinez</name>
+			<roles>
+				<role>développeur python</role>
+				<role>détection d’images</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Nicolas Nèble</name>
+			<roles>
+				<role>développeur java</role>
+				<role>interface graphique</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Nicolas Gasca</name>
+			<roles>
+				<role>développeur java</role>
+				<role>base de données</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<contributors>
+	<contributor>
+		<name>François Trahay</name>
+		<organization>Département INF</organization>
+      </contributor>
+      </contributors>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+    <dependencies>
+        <!-- junit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.11.4</version>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>3.5.2</version>
+		</dependency>
+	</dependencies>
+
+    <build>
+	    <plugins>
+		    <plugin>
+			    <artifactId>maven-assembly-plugin</artifactId>
+			    <executions>
+				    <execution>
+					    <phase>package</phase>
+					    <goals>
+						    <goal>single</goal>
+					    </goals>
+					    <configuration>
+						    <archive>
+							    <manifest>
+								    <mainClass>tsp.pro3600.memoryrace.interfaceswing.Main</mainClass>
+							    </manifest>
+						    </archive>
+						    <descriptorRefs>
+							    <descriptorRef>jar-with-dependencies</descriptorRef>
+						    </descriptorRefs>
+						    <finalName>standalone</finalName>
+					    </configuration>
+				    </execution>
+			    </executions>
+		    </plugin>
+	    </plugins>
+    </build>
+</project>
+
