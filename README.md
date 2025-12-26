@@ -4,6 +4,7 @@
 
 It allows runners to quickly access the photos in which they appear by simply entering their bib number, eliminating the need to manually browse through large image galleries.
 
+![MemoryRace demo](Application/logo.png)
 ---
 
 ## Project Context
