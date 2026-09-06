@@ -26,11 +26,11 @@ public class LocalDataFactory implements DataFactory{
 
    @Override
 	public PhotoData createPhotoData(int id, String date, float latitude, float longitude, byte[] imageBytes) {
-		return new LocalPhotoData(id, date, longitude, longitude, imageBytes);
+		return new LocalPhotoData(id, date, latitude, longitude, imageBytes);
 	}
 
 	@Override
 	public PhotoData createPhotoData(String date, float latitude, float longitude, byte[] imageBytes) {
-		return new LocalPhotoData(date, longitude, longitude, imageBytes);
+		return new LocalPhotoData(date, latitude, longitude, imageBytes);
 	}
 }
