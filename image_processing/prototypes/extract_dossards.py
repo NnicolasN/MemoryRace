@@ -1,11 +1,22 @@
+"""Prototype : détection des dossards par OCR (OpenCV + Tesseract).
+
+Cette approche a été abandonnée au profit d'un modèle multimodal, les
+dossards étant trop souvent flous, inclinés ou partiellement cachés pour
+Tesseract. Le script est gardé comme trace des essais faits pendant le
+projet.
+
+Usage : python3 extract_dossards.py image.jpg
+"""
+
 import cv2
 import pytesseract
 import numpy as np
 import re
 import os
+import sys
 
 
-image_path = r"C:\images\nico.jpg"
+image_path = sys.argv[1] if len(sys.argv) > 1 else "image.jpg"
 
 def extract_number(image_path):
     if not os.path.exists(image_path):

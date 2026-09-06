@@ -1,27 +1,33 @@
 #!/usr/bin/env bash
+# Prépare le dossier de travail de l'application : environnement Python
+# virtuel, dépendances, et copie du script de détection des dossards.
+#
+# Usage : ./install.sh [dossier]   (défaut : /tmp/photos)
 
-APP_ROOT_DIR="/tmp/photos"
+set -euo pipefail
 
-if [ $# -ge 1 ]; then
-    APP_ROOT_DIR=$1
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+APP_ROOT_DIR="${1:-/tmp/photos}"
+
+if ! command -v python3 > /dev/null; then
+    echo "python3 est introuvable. Installez-le avant de relancer ce script." >&2
+    exit 1
 fi
 
-install_app () {
-    echo "=> Installation du venv python"
+echo "=> Création du dossier $APP_ROOT_DIR"
+mkdir -p "$APP_ROOT_DIR"
 
-    python3 -m venv $APP_ROOT_DIR/venv
-    source $APP_ROOT_DIR/venv/bin/activate
-    pip3 install google-generativeai
-    pip3 install pillow
-    pip3 install mysql-connector
+echo "=> Installation du venv python"
+python3 -m venv "$APP_ROOT_DIR/venv"
+"$APP_ROOT_DIR/venv/bin/pip" install --quiet --upgrade pip
+"$APP_ROOT_DIR/venv/bin/pip" install --quiet -r "$SCRIPT_DIR/../image_processing/requirements.txt"
 
-    echo "=> Déplacement du script python"
+echo "=> Copie du script de détection"
+cp "$SCRIPT_DIR/../image_processing/dossards_extraction.py" "$APP_ROOT_DIR/dossards_extraction.py"
 
-    cp ../image_processing/final.py $APP_ROOT_DIR/dossards_extraction.py
-
-    echo "=> Chemin à passer en argument de l’application : \"$APP_ROOT_DIR\""
-    echo "=> Le chemin doit se terminer par un slash /"
-    echo "(par défaut : /tmp/photos/)"
-}
-
-install_app
+echo
+echo "Installation terminée."
+echo "Chemin à passer en argument de l'application : \"$APP_ROOT_DIR\""
+echo
+echo "Pensez à exporter votre clé Gemini avant de lancer l'application :"
+echo "    export GEMINI_API_KEY=<votre clé>"
