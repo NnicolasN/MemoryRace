@@ -5,10 +5,7 @@
 	<version>1</version>
 
 	<name>Application MemoryRace</name>
-	<description>Application cliente pour le projet PRO 3600 MemoryRace</description>
-	<organization>
-		<name>Télécom SudParis</name>
-	</organization>
+	<description>Application cliente MemoryRace</description>
 	<inceptionYear>2025</inceptionYear>
 
 	<developers>
@@ -45,7 +42,6 @@
 	<contributors>
 	<contributor>
 		<name>François Trahay</name>
-		<organization>Département INF</organization>
       </contributor>
       </contributors>
 

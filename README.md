@@ -8,8 +8,6 @@ It allows runners to quickly access the photos in which they appear by simply en
 
 ![MemoryRace home screen](docs/images/accueil.png)
 
-MemoryRace was built as a first year project (PRO3600) at Télécom SudParis.
-
 ## What it looks like
 
 Every window keeps the same layout, the logo on the left and the current step on the right. Clicking the logo goes back to the home screen. The screenshots below are cropped to that right panel.
@@ -143,15 +141,6 @@ Most SQL statements are built by string concatenation instead of prepared statem
 Photo upload runs the detection synchronously, so the interface freezes while Gemini processes a large batch.
 
 The application only talks to a local database. There is no server, so every user needs access to the MariaDB instance and to the shared photo folder.
-
-## Team
-
-Alexandre Naizondard, Python and database.
-Hugo Kennedy--Martinez, Python and image detection.
-Nicolas Nèble, Java and graphical interface.
-Nicolas Gasca, Java and database.
-
-Project supervised by François Trahay, département INF, Télécom SudParis.
 
 ## License
 
