@@ -1,0 +1,41 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  java:
+    name: Java client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: temurin
+          cache: maven
+
+      # The unit tests need a running MariaDB, so the build only checks that
+      # the client compiles and that the standalone jar can be assembled.
+      - name: Build
+        working-directory: Application
+        run: mvn -B clean package -DskipTests
+
+  python:
+    name: Detection script
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check syntax
+        run: python -m compileall -q image_processing
