@@ -6,11 +6,31 @@ MemoryRace is an application designed to simplify the identification and retriev
 
 It allows runners to quickly access the photos in which they appear by simply entering their bib number, eliminating the need to manually browse through large image galleries.
 
-<p align="center">
-  <img src="Application/src/main/resources/logo.png" alt="MemoryRace logo" width="220">
-</p>
+![MemoryRace home screen](docs/images/accueil.png)
 
 MemoryRace was built as a first year project (PRO3600) at Télécom SudParis.
+
+## What it looks like
+
+Every window keeps the same layout, the logo on the left and the current step on the right. Clicking the logo goes back to the home screen.
+
+### Runners
+
+| Pick the race, type the bib number | Browse the photos you appear on |
+| --- | --- |
+| ![Bib number search](docs/images/coureur.png) | ![Photo gallery](docs/images/photos.png) |
+
+The search above returns bib 1651 in the Marathon de Paris. The arrows move through the results and the download button saves the photo currently on screen. Clicking the photo opens it in a larger window.
+
+### Organizers
+
+| Log in | Choose what to do |
+| --- | --- |
+| ![Organizer login](docs/images/connexion.png) | ![Organizer menu](docs/images/organisateur.png) |
+| Create a race and upload its photos | Edit or delete an existing race |
+| ![Race creation](docs/images/creer.png) | ![Race edition](docs/images/modifier.png) |
+
+Bib detection starts on its own after every upload, so the photos are searchable as soon as the upload window closes.
 
 ## Project context
 
@@ -23,6 +43,8 @@ To address this issue, some events have started using systems that automatically
 MemoryRace aims to provide a simple, accessible and efficient solution that lets runners retrieve their photos through automated bib number recognition.
 
 ## How it works
+
+![How MemoryRace works](docs/images/pipeline.svg)
 
 The application has two kinds of users.
 
