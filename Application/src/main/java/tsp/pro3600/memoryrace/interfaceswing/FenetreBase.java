@@ -2,6 +2,7 @@ package tsp.pro3600.memoryrace.interfaceswing;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import tsp.pro3600.memoryrace.connectionmodel.*;
@@ -48,9 +49,11 @@ public abstract class FenetreBase extends JFrame {
 
         // Load and configure the logo on the left
         JLabel logoLabel = new JLabel();
-        ImageIcon logo = new ImageIcon("logo.png");
-        Image image = logo.getImage().getScaledInstance(300, -1, Image.SCALE_SMOOTH);
-        logoLabel.setIcon(new ImageIcon(image));
+        ImageIcon logo = loadLogo();
+        if (logo != null) {
+            Image image = logo.getImage().getScaledInstance(300, -1, Image.SCALE_SMOOTH);
+            logoLabel.setIcon(new ImageIcon(image));
+        }
         logoLabel.setHorizontalAlignment(JLabel.CENTER);
         logoLabel.setVerticalAlignment(JLabel.CENTER);
 
@@ -87,5 +90,20 @@ public abstract class FenetreBase extends JFrame {
 
         panelPrincipal.add(panelDroite, BorderLayout.CENTER);
         add(panelPrincipal);
+    }
+
+    /**
+     * Loads the logo bundled in the jar, and falls back to a logo.png sitting in
+     * the working directory when the classes are run from an IDE.
+     *
+     * @return the logo, or null if no image could be found.
+     */
+    private static ImageIcon loadLogo() {
+        URL bundled = FenetreBase.class.getResource("/logo.png");
+        if (bundled != null) {
+            return new ImageIcon(bundled);
+        }
+        ImageIcon local = new ImageIcon("logo.png");
+        return local.getIconWidth() > 0 ? local : null;
     }
 }
