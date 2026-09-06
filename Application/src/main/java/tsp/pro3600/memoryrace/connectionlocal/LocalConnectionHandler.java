@@ -93,7 +93,9 @@ public class LocalConnectionHandler implements ConnectionHandler{
 	this.port = port;
 	this.user = user;
 	this.password = password;
-	this.rootPath = rootPath;
+	/* The rest of the class builds paths by concatenation, so make sure the
+	   root always ends with a separator. */
+	this.rootPath = rootPath.endsWith("/") ? rootPath : rootPath + "/";
     }
 
     /**
