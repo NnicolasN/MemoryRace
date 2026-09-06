@@ -1,6 +1,6 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>tsp.pro3600.memoryrace</groupId>
+	<groupId>memoryrace</groupId>
 	<artifactId>application-client</artifactId>
 	<version>1</version>
 
@@ -87,7 +87,7 @@
 					    <configuration>
 						    <archive>
 							    <manifest>
-								    <mainClass>tsp.pro3600.memoryrace.interfaceswing.Main</mainClass>
+								    <mainClass>memoryrace.interfaceswing.Main</mainClass>
 							    </manifest>
 						    </archive>
 						    <descriptorRefs>
