@@ -12,7 +12,7 @@ MemoryRace was built as a first year project (PRO3600) at Télécom SudParis.
 
 ## What it looks like
 
-Every window keeps the same layout, the logo on the left and the current step on the right. Clicking the logo goes back to the home screen.
+Every window keeps the same layout, the logo on the left and the current step on the right. Clicking the logo goes back to the home screen. The screenshots below are cropped to that right panel.
 
 ### Runners
 
