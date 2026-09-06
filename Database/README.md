@@ -1,20 +1,61 @@
-# Quel SGBD ?
+# Database
 
-MariaDB, qui est la suite libre de MySQL après le rachat de SUN par Oracle.
-En Bonus, Adminer permet d’avoir une interface Web pour gérer la base de données.
+MariaDB, the free fork of MySQL created after Oracle bought Sun. Adminer comes
+along in the compose file and gives a web interface to browse the data.
 
-# Faire tourner le SGBD en local :
+## Running it locally
 
-1. Installer docker et docker-compose
-2. Ne pas modifier les mots de passes dans le fichier `docker-compose.yml` et lancer la commande :`$ sudo docker compose up`
-5. Créer une base de donnée `db`
-6. Importer init_db.sql
-7. Exéctuer
+1. Install Docker and Docker Compose.
+2. Leave the passwords in `docker-compose.yml` alone, they match the defaults
+   the application expects, and start the stack:
 
+   ```bash
+   docker compose up -d
+   ```
 
-# Premiers pas dans le SGBD
+The `db` database and the five tables are created on the first start, when the
+data volume is still empty. Adminer listens on <http://localhost:8080>, server
+`db`, user `root`, password `password`.
 
-Vous avez 2 scripts à votre disposition en plus du init_db.sql :
+To start over from an empty database, remove the volume:
 
-1. reset_db.sql : remet à 0 la base de donnée : supprime les tables puis les réinitialisent vides.
-2. micro_dataset.sql : ajoute les données relatives aux 30 photos de tests de la micro db initiale
+```bash
+docker compose down -v
+```
+
+## Scripts
+
+`init_db.sql` creates the tables. It is loaded automatically on the first
+start, you only need to run it by hand if you are working against a MariaDB
+instance you installed yourself.
+
+`reset_db.sql` drops the tables and recreates them empty.
+
+`micro_dataset.sql` fills the database with the 30 test photos of
+`Micro_dataset/`, split between three fictional races. The bib numbers come
+from the manual annotations of the dataset, so they can be used as a reference
+to check what the detection script finds. Copy the images into the photo folder
+of the application first:
+
+```bash
+cp Micro_dataset/images/*.png /tmp/photos/
+docker compose exec -T db mariadb -uroot -ppassword db < micro_dataset.sql
+```
+
+`junit.sql` inserts the minimal fixture the JUnit tests expect: one photo, two
+races, one detection and one organizer.
+
+## Schema
+
+Five tables:
+
+- `Courses`, a race with a date, a place and a name.
+- `Photos`, a photo attached to a race, with its capture date, its coordinates
+  and the file name it has in the photo folder.
+- `Detections`, one row per bib number found on a photo. A photo usually has
+  several.
+- `Organisateurs`, the accounts that can create races and upload photos.
+- `Organise`, which organizer manages which race.
+
+The photos themselves are not stored in the database. Only their file names
+are, and the files live in the folder given to the application at startup.

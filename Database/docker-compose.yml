@@ -1,20 +1,35 @@
+# Instance MariaDB de développement, plus Adminer pour la consulter depuis
+# un navigateur. Les mots de passe sont volontairement triviaux : cette
+# configuration n'est pas destinée à être exposée sur un réseau.
+
 services:
   db:
     image: mariadb:11.7.2
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: db
       MARIADB_USER: user
       MARIADB_PASSWORD: password
     ports:
       - 3306:3306
     volumes:
-      - type: bind
-        source: /srv/mariadb
-        target: /var/lib/mysql
+      # Les tables sont créées au premier démarrage, quand le volume est vide.
+      - ./init_db.sql:/docker-entrypoint-initdb.d/01_init_db.sql:ro
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+    depends_on:
+      - db
+
+volumes:
+  mariadb_data:
