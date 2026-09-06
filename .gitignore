@@ -1,0 +1,27 @@
+# Java / Maven
+target/
+*.class
+*.jar
+!Application/mariadb-java-client-*.jar
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# IDE
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets and generated files
+.env
+*.log
